@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KILLACALI: The Legend Scroll</title>
+  <link rel="icon" type="image/png" href="el_silencio_final_panel.png"/>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0a0a0a;
+      font-family: 'Courier New', monospace;
+      overflow-x: hidden;
+      color: white;
+    }
+    .scroll-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 50px 0;
+    }
+    .panel {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease-out;
+      margin-bottom: 50px;
+    }
+    .panel.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .panel img {
+      width: 100%;
+      height: auto;
+      border: 2px solid #444;
+    }
+    .final-message {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-top: 80px;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+    .final-message.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-container">
+    <div class="panel"><img src="dj_bones_panel.png" alt="DJ Bones" /></div>
+    <div class="panel"><img src="snapback_revenant_panel.png" alt="Snapback Revenant" /></div>
+    <div class="panel"><img src="midnight_mariachi_panel.png" alt="Midnight Mariachi" /></div>
+    <div class="panel"><img src="neon_bruja_panel.png" alt="Neon Bruja" /></div>
+    <div class="panel"><img src="la_dama_de_dusk_panel.png" alt="La Dama de Dusk" /></div>
+    <div class="panel"><img src="el_silencio_final_panel.png" alt="El Silencio" /></div>
+    <div class="final-message">“When the silence walks… the city listens.”</div>
+  </div>
+  <script>
+    const panels = document.querySelectorAll('.panel');
+    const finalMessage = document.querySelector('.final-message');
+    function revealOnScroll() {
+      const trigger = window.innerHeight * 0.9;
+      panels.forEach(panel => {
+        const rect = panel.getBoundingClientRect();
+        if (rect.top < trigger) {
+          panel.classList.add('visible');
+        }
+      });
+      const lastPanel = panels[panels.length - 1];
+      const lastPanelRect = lastPanel.getBoundingClientRect();
+      if (lastPanelRect.top < window.innerHeight * 0.6) {
+        finalMessage.classList.add('visible');
+      }
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
+</body>
+</html>
